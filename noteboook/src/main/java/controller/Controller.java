@@ -1,6 +1,8 @@
 package controller;
 
 import model.Model;
+import model.entity.NotUniqueNicknameException;
+import model.entity.Record;
 import view.View;
 
 import java.util.Scanner;
@@ -18,6 +20,17 @@ public class Controller {
         Scanner scanner = new Scanner(System.in);
         InputNoteBook inputNoteBook = new InputNoteBook(view, model, scanner);
         inputNoteBook.inputNote();
+        Record record = getRecord(inputNoteBook);
+        System.out.println(record);
 
+    }
+    private Record getRecord(InputNoteBook inputNoteBook){
+        Record record = null;
+        try {
+            record = new Record(inputNoteBook.getSurname(), inputNoteBook.getNickname());
+        }catch (NotUniqueNicknameException e){
+            view.printNotUniqueNickname(e.getMessage());
+        }
+        return record;
     }
 }

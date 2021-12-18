@@ -15,9 +15,9 @@ public class UtilityController {
 
     public String inputData(String message, String regex){
         String res;
-        view.printMessage(message);
+        view.printInputMessage(message);
         while (!(scanner.hasNext() && (res = scanner.next()).matches(regex))){
-            view.printMessage("Wrong data!");
+            view.printWrongMessage(message);
         }
         return res;
     }
